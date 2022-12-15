@@ -1,6 +1,7 @@
 public class Place extends Summon implements GetDescription{
     public String description;
-    Place(String description){
+    Place(String name,String description){
+        this.name = name;
         this.description = description;
     }
     public Place addItem(Item item){

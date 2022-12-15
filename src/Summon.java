@@ -28,10 +28,11 @@ public abstract class Summon {
         }
         return false;
     }
-    public String moveTo(Place from, Place to){
+    public void moveTo(Place from, Place to){
         to.addActor((Actor) this);
         from.remove(this);
     }
+
     @Override
     public String toString(){
         String placestr = name+", где находится:";
@@ -43,10 +44,9 @@ public abstract class Summon {
     }
     @Override
     public int hashCode(){
-        int hash = 0;
+        int hash = 15;
         for(char ch:this.name.toCharArray()){
-            hash+=Character.getNumericValue(ch);
-            hash = hash << String.valueOf(ch).length();
+            hash=hash*7+ch;
         }
         return hash;
     }
