@@ -1,17 +1,14 @@
 import java.util.*;
 
 public class Vincent extends Actor implements Contest,Shout {
-    public Map<Summon,String> memories;
+    public ArrayList<String> memories;
     Vincent(String name){
         super(name);
-        memories = new HashMap<Summon,String>();
+        memories = new ArrayList<String>();
     }
-    public Vincent setMemory(Summon summ, String memory){
-        memories.put(summ,memory);
+    public Vincent makeMemory(String memory){
+        memories.add(memory);
         return this;
-    }
-    public String getMemory(Summon summ){
-        return this.memories.get(summ);
     }
     public String getHear(Summon summ, Place where){
         return "услышал "+summ.name+" со "+where.getDescription();
@@ -20,6 +17,13 @@ public class Vincent extends Actor implements Contest,Shout {
         if(from.items.contains(what)){from.items.remove(what);this.items.add(what);}
         else{}
         return what.name;
+    }
+    public String getMemories(){
+        String memoriesAll = new String();
+        for(Summon key: this.memories.keySet()){
+            memoriesAll += this.memories.get(key);
+        }
+        return memoriesAll;
     }
     public String toArgue(Actor act) {
         return "Спорит с "+act.name+".";

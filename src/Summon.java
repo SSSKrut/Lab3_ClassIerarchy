@@ -50,4 +50,7 @@ public abstract class Summon {
         }
         return hash;
     }
+    public void clearContent(){
+        items.clear();
+    }
 }
