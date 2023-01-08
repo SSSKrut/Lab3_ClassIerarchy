@@ -1,6 +1,6 @@
 public class Item extends Entity implements GetDescription {
     public int count;
-    String description;
+    protected String description;
     Item(String name, int count){
         super(name); this.count = count;
     }

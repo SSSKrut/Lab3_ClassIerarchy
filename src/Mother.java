@@ -1,17 +1,20 @@
-public class Mother extends Actor implements Contest{
-    Mother(String name){
-        super(name);
+import java.util.Collections;
+
+public class Mother extends Actor implements Contest, Speaking{
+    Mother(String name, typeGender sex){
+        super(name,sex);
     }
     public String bendOver(Summon what){
-        return "перегибалась над "+what.name;
+        return this.name + " наклонилась над "+what.name;
     }
     public String mix(Summon what){
-        return "помешать в "+what.name;
+        Collections.shuffle(what.items);
+        return this.name +" помешала в "+what.name;
     }
     public String say(String what, Summon toWho){
         return this.name + " сказала " + toWho.name+": "+what;
     }
     public String toArgue(Actor act) {
-        return "Спорит с "+act.name+".";
+        return this.name + " начинает спор с "+act.name;
     }
 }

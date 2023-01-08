@@ -1,7 +1,7 @@
 public class Sister extends Actor {
     public typeHealth health;
-    Sister(String name){
-        super(name);
+    Sister(String name, typeGender sex){
+        super(name,sex);
     }
     public String clingTo(Summon what){
         return "Вцепилась в "+what.name+".";
@@ -9,7 +9,7 @@ public class Sister extends Actor {
     public void setEmotion(typeEmotions emo){
         this.emotion = emo;
     }
-    public String getEmotion(){
-        return this.emotion.toString();
+    public typeEmotions getEmotion(){
+        return this.emotion;
     }
 }

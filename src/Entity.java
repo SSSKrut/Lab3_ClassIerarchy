@@ -3,6 +3,7 @@ public class Entity extends Summon {
         super.name = name;
     }
     public String lookPoint(){
-        return name;
+        return super.name;
     }
+
 }

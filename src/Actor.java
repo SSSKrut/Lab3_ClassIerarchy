@@ -1,9 +1,9 @@
 public class Actor extends Entity{
-    public String location;
-    public typeGender sex;
-    public typeEmotions emotion;
-    Actor(String name){
-        super(name);
+    protected String location;
+    protected typeGender sex;
+    protected typeEmotions emotion;
+    Actor(String name,typeGender sex){
+        super(name);this.sex=sex;
     }
     public String getSex(){
         switch (sex){
@@ -34,12 +34,22 @@ public class Actor extends Entity{
         this.remove(what);
         return what.name;
     }
-    public String giveItem(Summon who,Item item, int count){
+    public String giveItem(Summon who, Item item, int count){
         who.items.add(new Item(item.name,count));
         this.remove(new Item(item.name,count));
         return item.name + " "+count;
     }
     public boolean lookAt(Entity object){
         return true;
+    }
+    public void moveTo(Place from, Place to){
+        to.addActor((Actor) this);
+        from.remove(this);
+    }
+    public void setEmotion(typeEmotions emo){
+        this.emotion = emo;
+    }
+    public typeEmotions getEmotion(){
+        return this.emotion;
     }
 }

@@ -8,13 +8,15 @@ public abstract class Summon {
         if(sum.hashCode() == this.hashCode()) {return true;}
         else {return false;}
     }
-    public boolean remove(Object obj) {
+    public boolean remove(Summon obj) {
         if(obj instanceof Item) {
             for(Summon it: items) {
                 if(obj.equals(it)) {
-                    Item itm = (Item)it;
-                    itm.count-=((Item) obj).count;
+                    ((Item)it).count-=((Item) obj).count;
                     return true;
+                }
+                else if(it.getItemsCount()>0) {
+                    if(it.remove(obj)){return true;}
                 }
             }
         } else {
@@ -24,13 +26,12 @@ public abstract class Summon {
                     items.remove(it);
                     return true;
                 }
+                else if(it.getItemsCount()>0) {
+                    if(it.remove(obj)){return true;}
+                }
             }
         }
         return false;
-    }
-    public void moveTo(Place from, Place to){
-        to.addActor((Actor) this);
-        from.remove(this);
     }
 
     @Override
@@ -52,5 +53,16 @@ public abstract class Summon {
     }
     public void clearContent(){
         items.clear();
+    }
+    public void add(Summon summon){
+        this.items.add(summon);
+    }
+    public float getItemsCount(){
+        float count = 0;
+        for(Summon i : this.items){
+            if(i instanceof Item){count += ((Item)i).count;}
+            else{count += 1;}
+        }
+        return count;
     }
 }
