@@ -2,6 +2,7 @@ public class Actor extends Entity{
     protected String location;
     protected typeGender sex;
     protected typeEmotions emotion;
+    protected typeHealth health;
     Actor(String name,typeGender sex){
         super(name);this.sex=sex;
     }
@@ -13,6 +14,16 @@ public class Actor extends Entity{
                 return "девочка";
             default:
                 return "не понятно";
+        }
+    }
+    public String getHealth(){
+        switch (health){
+            case healthy:
+                return "чувствует себя хорошо";
+            case sick:
+                return "болеет";
+            default:
+                return "не подает признаков жизни";
         }
     }
     public String takeSummon(Summon from,Summon what){
@@ -32,12 +43,12 @@ public class Actor extends Entity{
     public String giveSummon(Summon who, Summon what){
         who.items.add(what);
         this.remove(what);
-        return what.name;
+        return this.name+" даёт "+ what.name + " "+who.name;
     }
     public String giveItem(Summon who, Item item, int count){
         who.items.add(new Item(item.name,count));
         this.remove(new Item(item.name,count));
-        return item.name + " "+count;
+        return this.name + " кладёт " + item.name + "("+count+") на "+who.name;
     }
     public boolean lookAt(Entity object){
         return true;
@@ -51,5 +62,8 @@ public class Actor extends Entity{
     }
     public typeEmotions getEmotion(){
         return this.emotion;
+    }
+    public void setHealth(typeHealth heal){
+        this.health = heal;
     }
 }

@@ -19,12 +19,11 @@ public class Main {
         Item plateV = new Item("тарелка Винсента",1);
         Item plateS = new Item("тарелка сестры",1);
         Item shelf = new Item("полка для продуктов",1);
-        Item food = new Item("добавка",1);
         Item chocolate = new Item("шоколад",4);
-        Entity supplies = new Item("припасы",1);
-        Item potato = new Item("кусочки картошки",4);
-        Item carrot = new Item("кусочки моркови",3);
-        Item onion = new Item("кусочки лука",3);
+        Item supplies = new Item("галеты",2);
+        Item potato = new Item("кусочки еды",6);
+        Entity voiсeVincent = new Entity("низкий бас");
+        Entity feelRight = new Entity("ощущенье правоты");
 
         Vincent actVincent = new Vincent("Винсент",typeGender.male);
         Sister actSister = new Sister("Сестра",typeGender.female);
@@ -35,18 +34,16 @@ public class Main {
         DarkStuffyRoom.addActor(actMother);
 
         pot.add(potato);
-        pot.add(carrot);
-        pot.add(onion);
-        bed.items.add(quiltWhiteBlanket);
-        shelf.items.add(supplies);
-        burner.items.add(pot);
+        bed.add(quiltWhiteBlanket);
+        shelf.add(supplies);
+        burner.add(pot);
 
         DarkStuffyRoom.addItem(shelf).addItem(bed).addItem(burner);
         entryway.addItem(brownCeramicSink);
         productDistributor.addSummon(chocolate);
-        actMother.items.add(ladle); actMother.items.add(ticket);
-        actVincent.items.add(plateV);
-        actSister.items.add(plateS);
+        actMother.add(ladle); actMother.add(ticket);
+        actVincent.add(plateV);
+        actSister.add(plateS);
 
         actVincent.makeMemory("Test Memory");
         actMother.bendOver(burner);
@@ -55,17 +52,45 @@ public class Main {
         actVincent.setEmotion(typeEmotions.hungry);
         actMother.setEmotion(typeEmotions.hungry);
         actSister.setEmotion(typeEmotions.hungry);
-        actMother.giveItem(plateS,potato,potato.count/2);
-        actMother.giveItem(plateV,potato,potato.count);
+        actVincent.setHealth(typeHealth.healthy);
+        actMother.setHealth(typeHealth.healthy);
+        actSister.setHealth(typeHealth.sick);
+        System.out.println(actMother.giveItem(plateS,potato,potato.count/3));
+        System.out.println(actMother.giveItem(plateV,potato,potato.count/2));
         if(plateS.getItemsCount() >= plateV.getItemsCount()){
             actVincent.setEmotion(typeEmotions.angry);
         }
         if(actVincent.getEmotion() == typeEmotions.angry){
             System.out.println(actVincent.toArgue(actMother));
-            System.out.println(actVincent.say("почему ты не даешь мне больше? Я же "+actVincent.getSex().toString(),actMother));
+            System.out.println(actVincent.say("почему ты не даешь мне больше? Я же "+actVincent.getSex(),actMother));
             System.out.println(actVincent.toScream(actMother));
         }
-
+        if(actVincent.getSex()=="мальчик"){
+            actVincent.add(voiсeVincent);
+            System.out.println(actVincent.getRemember()+"свой "+voiсeVincent.name+". Голос стал ломаться рано");
+        }
+        System.out.println("------------");
+        if(pot.getItemsCount()>1){
+            System.out.println(actMother.giveItem(plateV,potato,1));
+            if(plateV.getItemsCount()>24){
+                actVincent.setEmotion(typeEmotions.noEmotion);
+            }
+            if(actVincent.getEmotion()==typeEmotions.angry){
+                System.out.println(actVincent.toArgue(actMother));
+                System.out.println(actVincent.say("дай мне еще!",actMother));
+                System.out.println(actVincent.toCry(actMother));
+            }
+        }
+        System.out.println(actMother.say("не будь эгоистом. "+actSister.name+" "+actSister.getHealth()+", и она тоже должна есть.",actVincent));
+        if(actVincent.getEmotion()==typeEmotions.angry) {
+            System.out.println(actVincent.toScream(actMother));
+            System.out.println(actVincent.grabSummon(actMother,ladle));
+            System.out.println(actVincent.grabSummon(plateS,potato));
+            actVincent.add(feelRight);
+        }
+        if(actMother.lookAt(bed)){
+            System.out.println(actVincent.toFilch(shelf,supplies));
+        }
 
 //        actVincent.makeMemory(DarkStuffyRoom, DarkStuffyRoom.getDescription()+" Половину занимала "+bed.name+" под "+quiltWhiteBlanket.name+", ");
 //        actVincent.makeMemory(burner, burner.name+", ");
