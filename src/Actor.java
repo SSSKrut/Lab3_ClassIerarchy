@@ -3,6 +3,7 @@ public class Actor extends Entity{
     protected typeGender sex;
     protected typeEmotions emotion;
     protected typeHealth health;
+    protected Entity lookingat;
     Actor(String name,typeGender sex){
         super(name);this.sex=sex;
     }
@@ -50,9 +51,10 @@ public class Actor extends Entity{
         this.remove(new Item(item.name,count));
         return this.name + " кладёт " + item.name + "("+count+") на "+who.name;
     }
-    public boolean lookAt(Entity object){
-        return true;
+    public String lookAt(Entity object){
+        this.lookingat=object;return this.name+" смотрит на "+object.name;
     }
+    public Entity getLookingat(){return this.lookingat;}
     public void moveTo(Place from, Place to){
         to.addActor((Actor) this);
         from.remove(this);

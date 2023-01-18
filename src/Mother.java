@@ -12,9 +12,16 @@ public class Mother extends Actor implements Contest, Speaking{
         return this.name +" помешала в "+what.name+".";
     }
     public String say(String what, Summon toWho){
-        return this.name + " сказала " + toWho.name+": "+what+".";
+        return this.name + " сказала " + toWho.name+": "+what;
     }
     public String toArgue(Actor act) {
         return this.name + " начинает спор с "+act.name+".";
+    }
+    public String toTakeFood(Item talon,Item what){
+        if(this.remove(talon)){
+            this.add(what);
+            return this.name+" получила "+what.name+".";
+        }
+        else{return this.name+" не получила ничего.";}
     }
 }

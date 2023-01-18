@@ -1,3 +1,3 @@
 public interface Contest {
-    public String toArgue(Actor act);
+    String toArgue(Actor act);
 }

@@ -7,7 +7,7 @@ public class Vincent extends Actor implements Contest,Shout,Speaking {
         memories = new ArrayList<String>();
     }
     public Vincent makeMemory(String memory){
-        memories.add(memory+". ");
+        memories.add(memory);
         return this;
     }
     public String getHear(Summon summ, Place where){
@@ -27,7 +27,7 @@ public class Vincent extends Actor implements Contest,Shout,Speaking {
         String memoriesAll = new String();
         memoriesAll += "Винсент вспомнинает..\n";
         for(String memory: this.memories){
-            memoriesAll+=memory;
+            memoriesAll+=memory+"\n";
         }
         return memoriesAll;
     }
@@ -44,7 +44,7 @@ public class Vincent extends Actor implements Contest,Shout,Speaking {
         return this.name + " хныкает и бьет на жалость "+act.name+".";
     }
     public String runTo(Place place){
-        return this.name + " убежал в"+place.getDescription()+".";
+        return this.name + " убежал в "+place.getDescription()+".";
     }
     //public String say(String what, Summon toWho){
     //    return this.name + " сказал " + toWho.name+": "+what;
@@ -57,10 +57,10 @@ public class Vincent extends Actor implements Contest,Shout,Speaking {
     }
     public String say(String what, Summon toWho){
         Random rand = new Random();
-        if(rand.nextInt(40)%4==0 & this.findItem(new Entity("низкий бас"))){
-            return this.name + " взревел басом на " + toWho.name+": "+what+".";
+        if(rand.nextInt(2)%2==0 & this.findItem(new Entity("низкий бас"))){
+            return this.name + " взревел басом на " + toWho.name+": "+what;
         }
-        else {return this.name + " сказал " + toWho.name+": "+what+".";}
+        else {return this.name + " сказал " + toWho.name+": "+what;}
     }
     public String toFilch(Entity from, Item item){
         if(from.remove(item)){

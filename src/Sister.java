@@ -4,7 +4,7 @@ public class Sister extends Actor {
         super(name,sex);
     }
     public String clingTo(Summon what){
-        return "Вцепилась в "+what.name+".";
+        return this.name+" вцепилась в "+what.name+".";
     }
     public void setEmotion(typeEmotions emo){
         this.emotion = emo;

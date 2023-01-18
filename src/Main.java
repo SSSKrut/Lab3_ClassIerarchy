@@ -41,13 +41,18 @@ public class Main {
         DarkStuffyRoom.addItem(shelf).addItem(bed).addItem(burner);
         entryway.addItem(brownCeramicSink);
         productDistributor.addSummon(chocolate);
-        actMother.add(ladle); actMother.add(ticket);
+        actMother.add(ladle);
         actVincent.add(plateV);
         actSister.add(plateS);
 
-        actVincent.makeMemory("Test Memory");
-        actMother.bendOver(burner);
-        actMother.mix(pot);
+        actVincent.makeMemory(DarkStuffyRoom.getDescription());
+        actVincent.makeMemory(bed.toString());
+        actVincent.makeMemory(shelf.toString());
+        actVincent.makeMemory(entryway.getDescription());
+        actVincent.makeMemory(entryway.toString());
+
+        actVincent.makeMemory(actMother.bendOver(burner));
+        actVincent.makeMemory(actMother.mix(pot));
         actMother.add(pot);
         actVincent.setEmotion(typeEmotions.hungry);
         actMother.setEmotion(typeEmotions.hungry);
@@ -55,86 +60,74 @@ public class Main {
         actVincent.setHealth(typeHealth.healthy);
         actMother.setHealth(typeHealth.healthy);
         actSister.setHealth(typeHealth.sick);
-        System.out.println(actMother.giveItem(plateS,potato,potato.count/3));
-        System.out.println(actMother.giveItem(plateV,potato,potato.count/2));
+        actVincent.makeMemory(actMother.giveItem(plateS,potato,potato.count/3));
+        actVincent.makeMemory(actMother.giveItem(plateV,potato,potato.count/2));
         if(plateS.getItemsCount() >= plateV.getItemsCount()){
             actVincent.setEmotion(typeEmotions.angry);
         }
         if(actVincent.getEmotion() == typeEmotions.angry){
-            System.out.println(actVincent.toArgue(actMother));
-            System.out.println(actVincent.say("почему ты не даешь мне больше? Я же "+actVincent.getSex(),actMother));
-            System.out.println(actVincent.toScream(actMother));
+            actVincent.makeMemory(actVincent.toArgue(actMother));
+            actVincent.makeMemory(actVincent.say("почему ты не даешь мне больше? Я же "+actVincent.getSex(),actMother));
+            actVincent.makeMemory(actVincent.toScream(actMother));
         }
         if(actVincent.getSex()=="мальчик"){
             actVincent.add(voiсeVincent);
-            System.out.println(actVincent.getRemember()+"свой "+voiсeVincent.name+". Голос стал ломаться рано");
+            actVincent.makeMemory(actVincent.getRemember()+"свой "+voiсeVincent.name+". Голос стал ломаться рано");
         }
-        System.out.println("------------");
+
         if(pot.getItemsCount()>1){
-            System.out.println(actMother.giveItem(plateV,potato,1));
+            actVincent.makeMemory(actMother.giveItem(plateV,potato,1));
             if(plateV.getItemsCount()>24){
                 actVincent.setEmotion(typeEmotions.noEmotion);
             }
             if(actVincent.getEmotion()==typeEmotions.angry){
-                System.out.println(actVincent.toArgue(actMother));
-                System.out.println(actVincent.say("дай мне еще!",actMother));
-                System.out.println(actVincent.toCry(actMother));
+                actVincent.makeMemory(actVincent.toArgue(actMother));
+                actVincent.makeMemory(actVincent.say("дай мне еще!",actMother));
+                actVincent.makeMemory(actVincent.toCry(actMother));
             }
         }
-        System.out.println(actMother.say("не будь эгоистом. "+actSister.name+" "+actSister.getHealth()+", и она тоже должна есть.",actVincent));
+        actVincent.makeMemory(actMother.say("не будь эгоистом. "+actSister.name+" "+actSister.getHealth()+", и она тоже должна есть",actVincent));
         if(actVincent.getEmotion()==typeEmotions.angry) {
-            System.out.println(actVincent.toScream(actMother));
-            System.out.println(actVincent.grabSummon(actMother,ladle));
-            System.out.println(actVincent.grabSummon(plateS,potato));
+            actVincent.makeMemory(actVincent.toScream(actMother));
+            actVincent.makeMemory(actVincent.grabSummon(actMother,ladle));
+            actVincent.makeMemory(actVincent.grabSummon(plateS,potato));
             actVincent.add(feelRight);
         }
-        if(actMother.lookAt(bed)){
-            System.out.println(actVincent.toFilch(shelf,supplies));
+        actVincent.makeMemory(actMother.lookAt(bed));
+        if(actMother.getLookingat()!=shelf){
+            actVincent.makeMemory(actVincent.toFilch(shelf,supplies));
+            actVincent.setEmotion(typeEmotions.noEmotion);
         }
 
-//        actVincent.makeMemory(DarkStuffyRoom, DarkStuffyRoom.getDescription()+" Половину занимала "+bed.name+" под "+quiltWhiteBlanket.name+", ");
-//        actVincent.makeMemory(burner, burner.name+", ");
-//        actVincent.makeMemory(shelf, shelf.name+".");
-//        actVincent.makeMemory(entryway, " На "+entryway.getDescription()+" была ");
-//        actVincent.makeMemory(brownCeramicSink, brownCeramicSink.name+", одна на несколько семей.");
+        actMother.remove(ladle);actMother.remove(pot);
+        actVincent.remove(plateV);actVincent.remove(ladle);
+        actSister.remove(plateS);
+        actVincent.moveTo(DarkStuffyRoom,productDistributor);
+        actSister.moveTo(DarkStuffyRoom,productDistributor);
+        actMother.moveTo(DarkStuffyRoom,productDistributor);
+        actVincent.makeMemory(actMother.toTakeFood(ticket,chocolate));
+
+        actVincent.makeMemory(actVincent.getHear(voiсeVincent,side));
+        actVincent.makeMemory(actVincent.say("дай мне все!",actMother));
+        actVincent.makeMemory(actMother.say("не жадничай!",actVincent));
+        actVincent.makeMemory(actVincent.toArgue(actMother));
+        actVincent.makeMemory(actVincent.toScream(actMother));
+        actVincent.makeMemory(actVincent.toCry(actMother));
+
+        actSister.setEmotion(typeEmotions.sadEyes);
+        actVincent.makeMemory(actSister.clingTo(actMother));
+        actVincent.makeMemory(actSister.lookAt(actVincent));
+
+        actVincent.makeMemory(actMother.giveItem(actVincent,chocolate,3));
+        actVincent.makeMemory(actMother.giveItem(actSister,chocolate,1));
+
+        actVincent.makeMemory(actSister.lookAt(chocolate));
+        actVincent.makeMemory(actVincent.lookAt(actSister));
+        actVincent.makeMemory(actVincent.grabSummon(actSister,chocolate));
+        actVincent.makeMemory(actVincent.runTo(out));
 
         actVincent.clearContent();
         System.out.println(actVincent.getMemories());
-//        System.out.println("Он помнил их комнату.");
-//        System.out.print(vincent.getMemory(DarkStuffyRoom));
-//        System.out.print(vincent.getMemory(burner));
-//        System.out.println(vincent.getMemory(shelf));
-//        System.out.print(vincent.getMemory(entryway));
-//        System.out.println(vincent.getMemory(brownCeramicSink));
-//
-//        System.out.println("Он помнил как "+mother.name+" "+mother.bendOver(burner)+", чтобы "+mother.mix(pot)+".");
-//        System.out.println("Но лучше всего он помнил непрерывный голод.");
-//        mother.takeSummon(burner,pot);
-//        System.out.println(vincent.toArgue(mother)+" "+vincent.toScream(mother)+" Чтобы получить добавку.");
-//        System.out.println(mother.name+" с готовностью давала ему "+mother.giveSummon(vincent,food)+".");
-//        System.out.print("Если она переставала накладывать, "+vincent.name+" "+vincent.toScream(mother)+", выхватывал "+vincent.grabSummon(mother,ladle)+" и "+vincent.grabSummon(mother,pot)+".");
-//        System.out.println(" Воровал "+vincent.grabSummon(plateS,foodnaggets)+" с "+plateS.name+".");
-//        if(mother.lookAt(bed)){
-//            vincent.takeSummon(supplies,food);
-//            System.out.println("Стоило только "+mother.name+" отвернуться, тащил из "+supplies.name+".");
-//        }
-//        mother.moveTo(DarkStuffyRoom,productDistributor);
-//        vincent.moveTo(DarkStuffyRoom,productDistributor);
-//        sister.moveTo(DarkStuffyRoom,productDistributor);
-//        System.out.println("\nОднажды им выдали по "+ticket.name+" "+chocolate.name+".");
-//        mother.giveSummon(productDistributor,ticket);
-//        mother.takeSummon(productDistributor,chocolate);
-//        System.out.println("Впервые за несколько месяцев.");
-//        System.out.println("Винсент "+vincent.getHear(vincent,side));
-//        System.out.println("Он требовал все.");
-//        System.out.println(vincent.toArgue(mother)+" "+vincent.toScream(mother));
-//        sister.lookAt(vincent);sister.emotion=typeEmotions.sadEyes;
-//        System.out.println("Сестра "+sister.clingTo(mother)+" Смотрела на него печальными глазами.");
-//        System.out.println(mother.name+" дала "+vincent.name+" "+mother.giveItem(vincent,chocolate,3)+" и "+sister.name+" "+mother.giveItem(sister,chocolate,1)+".");
-//        sister.lookAt(chocolate); sister.emotion=typeEmotions.noEmotion;
-//        System.out.println(sister.name+" тупо смотрела на него.");
-//        vincent.lookAt(sister);
-//        System.out.println(vincent.name+" наблюдал за ней.");
-//        System.out.println("Затем подскочил, выхватил у нее"+vincent.grabSummon(sister,chocolate)+" и "+vincent.runTo(out)+"..");
+
     }
 }

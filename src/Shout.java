@@ -1,3 +1,3 @@
 public interface Shout {
-    public String toScream(Actor act);
+    String toScream(Actor act);
 }

@@ -1,3 +1,3 @@
 public interface GetDescription {
-    public String getDescription();
+    String getDescription();
 }
