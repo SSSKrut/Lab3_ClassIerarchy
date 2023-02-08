@@ -25,7 +25,7 @@ public class Main {
             Entity voiсeVincent = new Entity("низкий бас");
             Entity feelRight = new Entity("ощущенье правоты");
 
-            Vincent actVincent = new Vincent("Винсент", typeGender.male);
+            Vincent actVincent = new Vincent("", typeGender.male);
             Sister actSister = new Sister("Сестра", typeGender.female);
             Mother actMother = new Mother("Мать", typeGender.female);
 
@@ -109,7 +109,6 @@ public class Main {
             actMother.moveTo(DarkStuffyRoom, productDistributor);
             actVincent.makeMemory(actMother.toTakeFood(ticket, chocolate));
             //actVincent.lookAt(actVincent);
-            Entity act = new Entity("");
             actVincent.makeMemory(actVincent.getHear(voiсeVincent, side));
             actVincent.makeMemory(actVincent.say("дай мне все!", actMother));
             actVincent.makeMemory(actMother.say("не жадничай!", actVincent));

@@ -1,10 +1,11 @@
 import java.util.*;
-
+import exceptions.*;
 public class Vincent extends Actor implements Contest,Shout,Speaking {
     public ArrayList<String> memories;
-    Vincent(String name, typeGender sex){
+    Vincent(String name, typeGender sex) throws NameException{
         super(name,sex);
         memories = new ArrayList<String>();
+        if(name.length()==0){throw new NameException("Non declared lenght of str");}
     }
     public Vincent makeMemory(String memory){
         memories.add(memory);

@@ -6,7 +6,7 @@ public class Actor extends Entity{
     protected typeEmotions emotion;
     protected typeHealth health;
     protected Entity lookingat;
-    Actor(String name,typeGender sex) throws NameException{
+    Actor(String name,typeGender sex){
         super(name);this.sex=sex;
     }
     public String getSex(){
