@@ -1,10 +1,12 @@
+import exceptions.*;
+
 public class Actor extends Entity{
     protected String location;
     protected typeGender sex;
     protected typeEmotions emotion;
     protected typeHealth health;
     protected Entity lookingat;
-    Actor(String name,typeGender sex){
+    Actor(String name,typeGender sex) throws NameException{
         super(name);this.sex=sex;
     }
     public String getSex(){
@@ -51,7 +53,10 @@ public class Actor extends Entity{
         this.remove(new Item(item.name,count));
         return this.name + " кладёт " + item.name + "("+count+") на "+who.name;
     }
-    public String lookAt(Entity object){
+    public String lookAt(Entity object) throws SpaceException{
+        if(this == object){
+            throw new SpaceException(this.name+":"+this.hashCode()+" пытается смотреть на "+object.name+":"+object.hashCode());
+        }
         this.lookingat=object;return this.name+" смотрит на "+object.name;
     }
     public Entity getLookingat(){return this.lookingat;}

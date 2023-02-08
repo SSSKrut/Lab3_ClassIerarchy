@@ -108,7 +108,8 @@ public class Main {
             actSister.moveTo(DarkStuffyRoom, productDistributor);
             actMother.moveTo(DarkStuffyRoom, productDistributor);
             actVincent.makeMemory(actMother.toTakeFood(ticket, chocolate));
-
+            //actVincent.lookAt(actVincent);
+            Entity act = new Entity("");
             actVincent.makeMemory(actVincent.getHear(voiсeVincent, side));
             actVincent.makeMemory(actVincent.say("дай мне все!", actMother));
             actVincent.makeMemory(actMother.say("не жадничай!", actVincent));

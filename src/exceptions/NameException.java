@@ -1,6 +1,6 @@
 package exceptions;
 public class NameException extends Exception {
-    NameException(String message){
+    public NameException(String message){
         super(message);
     }
 }
