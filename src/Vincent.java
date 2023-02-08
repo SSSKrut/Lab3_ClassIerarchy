@@ -5,7 +5,7 @@ public class Vincent extends Actor implements Contest,Shout,Speaking {
     Vincent(String name, typeGender sex) throws NameException{
         super(name,sex);
         memories = new ArrayList<String>();
-        if(name.length()==0){throw new NameException("Non declared lenght of str");}
+        if(name.length()==0){throw new NameException("Non declared lenght of name-str-Vincent");}
     }
     public Vincent makeMemory(String memory){
         memories.add(memory);

@@ -1,8 +1,13 @@
 import java.util.HashMap;
 import java.util.Map;
 import exceptions.*;
+
+import javax.naming.Name;
+
 public class Main {
-    public static void main(String[] args) throws NameException{
+    public static void main(String[] args) {
+        Formatting.Paragraph form = new Formatting.Paragraph();
+        try {
             Place DarkStuffyRoom = new Place("Комната", "Наша комната, тёмная душная комната.");
             Place entryway = new Place("Лестничная площадка", "Лестничная площадка");
             Place productDistributor = new Place("Выдача продуктов", "Место, в котором, вероятно, выдавали продукты.");
@@ -15,7 +20,7 @@ public class Main {
             Item brownCeramicSink = new Item("коричневая керамическая раковина", 1);
             Item ticket = new Item("талон", 1);
             Item ladle = new Item("половник", 1);
-            Item burner = new Item("камин с газовой конфоркой", 1);
+            var burner = new Item("камин с газовой конфоркой", 1){public String warm(Summon what){return this.name+" нагрел "+what.name;}};
             Item plateV = new Item("тарелка Винсента", 1);
             Item plateS = new Item("тарелка сестры", 1);
             Item shelf = new Item("полка для продуктов", 1);
@@ -25,7 +30,7 @@ public class Main {
             Entity voiсeVincent = new Entity("низкий бас");
             Entity feelRight = new Entity("ощущенье правоты");
 
-            Vincent actVincent = new Vincent("", typeGender.male);
+            Vincent actVincent = new Vincent("Винсент", typeGender.male);
             Sister actSister = new Sister("Сестра", typeGender.female);
             Mother actMother = new Mother("Мать", typeGender.female);
 
@@ -53,6 +58,7 @@ public class Main {
 
             actVincent.makeMemory(actMother.bendOver(burner));
             actVincent.makeMemory(actMother.mix(pot));
+            actVincent.makeMemory(burner.warm(pot));
             actMother.add(pot);
             actVincent.setEmotion(typeEmotions.hungry);
             actMother.setEmotion(typeEmotions.hungry);
@@ -98,7 +104,7 @@ public class Main {
                 actVincent.makeMemory(actVincent.toFilch(shelf, supplies));
                 actVincent.setEmotion(typeEmotions.noEmotion);
             }
-
+            actVincent.makeMemory(form.printLn());
             actMother.remove(ladle);
             actMother.remove(pot);
             actVincent.remove(plateV);
@@ -107,7 +113,8 @@ public class Main {
             actVincent.moveTo(DarkStuffyRoom, productDistributor);
             actSister.moveTo(DarkStuffyRoom, productDistributor);
             actMother.moveTo(DarkStuffyRoom, productDistributor);
-            actVincent.makeMemory(actMother.toTakeFood(ticket, chocolate));
+            //actVincent.makeMemory(actMother.toTakeFood(ticket, chocolate));
+            actVincent.makeMemory(actMother.takeChocolate(chocolate, ticket));
             //actVincent.lookAt(actVincent);
             actVincent.makeMemory(actVincent.getHear(voiсeVincent, side));
             actVincent.makeMemory(actVincent.say("дай мне все!", actMother));
@@ -130,5 +137,8 @@ public class Main {
 
             actVincent.clearContent();
             System.out.println(actVincent.getMemories());
+            }
+        catch (SpaceException ex){System.out.println(ex.toString());}
+        catch (NameException ex){System.out.println(ex.toString());}
     }
 }

@@ -53,6 +53,7 @@ public class Actor extends Entity{
         this.remove(new Item(item.name,count));
         return this.name + " кладёт " + item.name + "("+count+") на "+who.name;
     }
+
     public String lookAt(Entity object) throws SpaceException{
         if(this == object){
             throw new SpaceException(this.name+":"+this.hashCode()+" пытается смотреть на "+object.name+":"+object.hashCode());

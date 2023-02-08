@@ -1,7 +1,7 @@
 public class Formatting {
     static class Paragraph{
-        void printLn(){
-            System.out.println("");
+        String printLn(){
+            return "\n";
         }
     }
 
